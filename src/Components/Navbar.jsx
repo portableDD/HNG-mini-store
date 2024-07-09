@@ -12,9 +12,11 @@ import  { useState } from 'react'
 const Navbar = ({isHome = false}) => {
     const bg = isHome ? "bg-bgColor" : "bg-transparent ";
     const linkClass = ({isActive}) => isActive ? " hover:bg-gray-900 hover:text-white rounded-md px-3 py-2" : " hover:bg-gray-900 hover:text-white rounded-md px-3 py-2";
-    const [toggle, setToggle] = useState(true)
+    const nav =document.getElementById('menu')
+    const [toggle, setToggle] = useState(false)
     const handleClick = () => {
         setToggle(!toggle);
+        nav.style.visibility = 'visible'
       };
 
   return (
@@ -47,7 +49,7 @@ const Navbar = ({isHome = false}) => {
         </header>
         {toggle ? (
             <div className = "hide-toggle-menu side-menu" >
-                <div className="flex-col items-center text-center py-4  font-bold shadow-md" id="menu">
+                <div className="flex-col  md:hidden items-center text-center py-4  font-bold shadow-md" id="menu">
                     <ul>
                     <ul className="">
                         <li><NavLink to="/"  className={linkClass}>Home</NavLink></li>
