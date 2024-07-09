@@ -5,12 +5,18 @@ import { FaSearch } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
 import { FaUser } from "react-icons/fa";
 import { FaBars } from "react-icons/fa6";
+import  { useState } from 'react'
 
 
 
 const Navbar = ({isHome = false}) => {
     const bg = isHome ? "bg-bgColor" : "bg-transparent ";
-    const linkClass = ({isActive}) => isActive ? " hover:bg-gray-900 hover:text-white rounded-md px-3 py-2" : " hover:bg-gray-900 hover:text-white rounded-md px-3 py-2"
+    const linkClass = ({isActive}) => isActive ? " hover:bg-gray-900 hover:text-white rounded-md px-3 py-2" : " hover:bg-gray-900 hover:text-white rounded-md px-3 py-2";
+    const [toggle, setToggle] = useState(true)
+    const handleClick = () => {
+        setToggle(!toggle);
+      };
+
   return (
     <>
         <header className={` ${bg} flex flex-row items-center justify-evenly text-black  px-6 mx-auto space-y-0 md:space-y-0`}> 
@@ -35,25 +41,23 @@ const Navbar = ({isHome = false}) => {
                 </Link>
                 <FaUser/>
             </div>
-            <div className = "toggle-menu lg:hidden  md:hidden">
-                <FaBars />
+            <div className = "toggle-menu md:hidden focus:outline-none" id="menu-btn" >
+                <FaBars onClick={handleClick} className="text-2xl"/>
             </div>
         </header>
-        {/* <div className = "hide-toggle-menu side-menu" id="side-menu">
-            <ul>
-                <li><Link to="/">Home</Link></li>
-                <li><NavLink to="/shoes">Shoes</NavLink></li>
-                <li><NavLink to="/sandal">Sandals</NavLink></li>
-                <li><NavLink to="/slipper">Slippers</NavLink></li>
-                <li><NavLink to="/contact">Contact Us </NavLink></li>
-                <li><NavLink to="/about">About Us</NavLink></li>
-                <li>
-                    <NavLink to="/sign-in">
-                        Sign in as seller
-                    </NavLink>
-                </li>
-            </ul>
-        </div> */}
+        {toggle ? (
+            <div className = "hide-toggle-menu side-menu" >
+                <div className="flex-col items-center text-center py-4  font-bold shadow-md" id="menu">
+                    <ul>
+                    <ul className="">
+                        <li><NavLink to="/"  className={linkClass}>Home</NavLink></li>
+                        <li><NavLink to="#about"  className={linkClass}>About Us</NavLink></li>                       
+                        <li><NavLink to="/shop"  className={linkClass}>Shop</NavLink></li>
+                    </ul>
+                    </ul>
+                </div>
+            </div>
+        ): <></>}
     </>
   )
 }
